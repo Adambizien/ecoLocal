@@ -27,6 +27,15 @@
                             <button type="submit" class="btn btn-light text-success">Déconnexion</button>
                         </form>
                     </li>
+                    @if (Auth::user()->isAdmin())
+                        <li class="nav-item">
+                            <a class="btn btn-light text-success" href="{{ route('admin.partials.users.index') }}">Menu Admin</a>
+                        </li>
+                    @else 
+                        <li class="nav-item">
+                            <a class="btn btn-light text-success" href="{{ route('project.create') }}">Créer un Projet</a>
+                        </li>
+                    @endif
                 @endauth
             </ul>
         </div>

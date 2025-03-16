@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
-    <h1 class="mb-4 text-success">Créer un Projet</h1>
-
+<div class="container mt-5 mb-5">
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -13,10 +11,19 @@
             </ul>
         </div>
     @endif
-
-    <div class="card p-4">
-        <form method="POST" action="{{ route('project.store') }}" novalidate>
+    <div class="card p-4 w-75 mx-auto">
+        <h1 class="mb-4 text-success">Créer un Projet</h1>
+        <form method="POST" action="{{ route('project.store') }}" novalidate  enctype="multipart/form-data">
             @csrf
+
+             <!-- Champ pour l'image -->
+             <div class="mb-3">
+                <label for="image" class="form-label">Image du projet</label>
+                <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror" accept="image/*">
+                @error('image')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
 
             <!-- Titre du projet -->
             <div class="mb-3">
@@ -71,7 +78,7 @@
                     <option value="">Sélectionnez une catégorie</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
-                            {{ $category->title }}
+                            {{ $category->titl }}
                         </option>
                     @endforeach
                 </select>
@@ -80,14 +87,12 @@
                 @enderror
             </div>
 
-            <!-- Ajout des paliers de donation -->
             <div id="tiers-container">
                 <h3 class="text-success d-inline">Ajouter des paliers de donation</h3>
                 <button type="button" id="add-tier" class="btn btn-outline-success ms-3 d-inline">+</button>
 
-                <div class="row g-3 mt-3" id="tiers-row">
-                    <!-- Premier palier -->
-                    <div class="tier col-md-4 card mb-3 mt-3 p-3">
+                <div class="row " id="tiers-row">
+                    <div class="tier col-md-4 card mt-3">
                         <div class="card-body">
                             <label for="tier_title" class="form-label">Titre du palier</label>
                             <input type="text" name="tiers[0][title]" class="form-control @error('tiers.0.title') is-invalid @enderror" value="{{ old('tiers.0.title') }}" required>

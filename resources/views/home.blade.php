@@ -11,7 +11,7 @@
     </div>
 </header>
 
-<section class="my-5">
+<!-- <section class="my-5">
     <h2 class="text-center mb-4">Projets en vedette</h2>
     <div class="row">
         <div class="col-md-4">
@@ -45,5 +45,5 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 @endsection

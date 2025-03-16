@@ -9,15 +9,18 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     </head>
     <body>
         @include('partials.navbar')
+        <div class="d-flex flex-column min-vh-100">
+            <div class="w-100 flex-grow-1">
+                @yield('content')
+            </div>
 
-        <div class="container">
-            @yield('content')
+            @include('partials.footer')
         </div>
-
-        @include('partials.footer')
+        
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     </body>

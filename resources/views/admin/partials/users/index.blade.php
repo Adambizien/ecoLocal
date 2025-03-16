@@ -5,6 +5,11 @@
     <div class="row">
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <h1 class="h2">Gestion des Utilisateurs</h1>
+
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -22,18 +27,19 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
-                                @if($user->role === 'admin')
-                                    <span class="badge text-bg-danger">Administrateur</span>
-                                @else
-                                    <span class="badge text-bg-info">Utilisateur</span>
-                                @endif
+                                <span class="badge {{ $user->role === 'admin' ? 'bg-danger' : 'bg-info' }}">
+                                    {{ $user->role === 'admin' ? 'Administrateur' : 'Utilisateur' }}
+                                </span>
                             </td>
                             <td>
                                 <a href="{{ route('admin.partials.users.edit', $user->id) }}" class="btn btn-sm btn-warning">Modifier</a>
-                                <form action="#" method="POST" style="display:inline;">
+                                
+                                <form action="{{ route('admin.partials.users.destroy', $user->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger">Supprimer</button>
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?');">
+                                        Supprimer
+                                    </button>
                                 </form>
                             </td>
                         </tr>
@@ -44,3 +50,4 @@
     </div>
 </div>
 @endsection
+

@@ -22,8 +22,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('admin.partials.users.edit');
     Route::put('/users/{user}', [UserController::class, 'update'])->name('admin.partials.users.update');
     Route::get('/admin/users', [UserController::class, 'index'])->name('admin.partials.users.index');
+    Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.partials.users.destroy');
     Route::get('/admin/projects', [ProjectController::class, 'index'])->name('admin.partials.projects');
     Route::get('/admin/categories', [CategoriesController::class, 'index'])->name('admin.partials.categories.index');
+    Route::get('/admin/categories/create', [CategoriesController::class, 'create'])->name('category.create');
+    Route::post('/admin/categories/store', [CategoriesController::class, 'store'])->name('category.store');
+    Route::get('/admin/categories/{category}/edit', [CategoriesController::class, 'edit'])->name('category.edit');
+    Route::put('/admin/categories/{category}', [CategoriesController::class, 'update'])->name('category.update');
+    Route::delete('/admin/categories/{category}', [CategoriesController::class, 'destroy'])->name('category.destroy');
 
 });
 
@@ -32,14 +38,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/create-project', [ProjectController::class, 'store'])->name('project.store');
 });
 
-
-Route::middleware('auth')->group(function () {
-    Route::get('/admin/categories/create', [CategoriesController::class, 'create'])->name('category.create');
-    Route::post('/admin/categories/store', [CategoriesController::class, 'store'])->name('category.store');
-    Route::get('/admin/categories/{category}/edit', [CategoriesController::class, 'edit'])->name('category.edit');
-    Route::put('/admin/categories/{category}', [CategoriesController::class, 'update'])->name('category.update');
-    Route::delete('/admin/categories/{category}', [CategoriesController::class, 'destroy'])->name('category.destroy');
-});
 
 
 require __DIR__.'/auth.php';

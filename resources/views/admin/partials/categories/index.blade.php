@@ -1,20 +1,22 @@
 @extends('admin.index')
 
 @section('admin-content')
-
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
 <div class="container-fluid">
     <div class="row">
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <h1 class="h2">Gestion des Catégories</h1>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
             <a href="{{ route('category.create') }}" class="btn btn-primary mb-3">Créer une nouvelle catégorie</a>
             <table class="table table-striped">
                 <thead>

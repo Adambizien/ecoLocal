@@ -30,4 +30,10 @@ class UserController extends Controller
         return redirect()->route('admin.partials.users.index')->with('success', 'Utilisateur mis à jour avec succès');
     }
 
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect()->route('admin.partials.users.index')->with('success', 'Utilisateur supprimé avec succès');
+    }
+
 }

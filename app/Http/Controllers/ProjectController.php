@@ -22,6 +22,7 @@ class ProjectController extends Controller
 
     public function store(Request $request)
     {
+        // Validation des données
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -37,12 +38,16 @@ class ProjectController extends Controller
             'tiers.*.description' => 'required|string',
         ]);
 
+        // Upload de l'image
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('projects', 'public');
         }
 
-        $project = new Project([
+
+
+        // Création du projet
+        $project = Project::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'goal_amount' => $request->input('goal_amount'),
@@ -51,11 +56,10 @@ class ProjectController extends Controller
             'end_date' => $request->input('end_date'),
             'category_id' => $request->input('category_id'),
             'user_id' => auth()->id(),
-            'image' => $imagePath,
+            'image' => $imagePath, // Stocke le chemin de l'image
         ]);
-        
-        $project->save();
 
+        // Ajout des paliers de donation
         foreach ($request->input('tiers', []) as $tierData) {
             $project->tiers()->create([
                 'title' => $tierData['title'],

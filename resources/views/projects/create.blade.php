@@ -117,7 +117,7 @@
             </div>
 
             <!-- Bouton de soumission -->
-            <button type="submit" class="btn btn-success mt-3">Créer le projet</button>
+            <button type="submit" class="btn btn-success mt-3" id="submit-button" onclick="this.disabled=true; this.form.submit();">Créer le projet</button>
         </form>
     </div>
 </div>

@@ -14,7 +14,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link {{ request()->routeIs('admin.partials.projects') ? 'bg-success text-white' : 'text-light' }}" href="{{ route('admin.partials.projects') }}">
+                    <a class="nav-link {{ request()->routeIs('admin.partials.projects.index') ? 'bg-success text-white' : 'text-light' }}" href="{{ route('admin.partials.projects.index') }}">
                         <i class="bi bi-briefcase"></i> Gérer les Projets
                     </a>
                 </li>

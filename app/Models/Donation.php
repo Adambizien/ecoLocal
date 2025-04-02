@@ -10,7 +10,6 @@ class Donation extends Model
         'amount',
         'project_id',
         'user_id',
-        'tier_id'
     ];
 
     // Relation avec le projet

@@ -11,6 +11,7 @@
                         <th>ID</th>
                         <th>Nom du Projet</th>
                         <th>Description</th>
+                        <th>Catégorie</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -18,8 +19,9 @@
                     @foreach($projects as $project)
                         <tr>
                             <td>{{ $project->id }}</td>
-                            <td>{{ $project->name }}</td>
+                            <td>{{ $project->title }}</td> 
                             <td>{{ $project->description }}</td>
+                            <td>{{ $project->category->title }}</td>
                             <td>
                                 <a href="#" class="btn btn-sm btn-warning">Modifier</a>
                                 <form action="#" method="POST" style="display:inline;">

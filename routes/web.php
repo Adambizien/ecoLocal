@@ -23,7 +23,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/users/{user}', [UserController::class, 'update'])->name('admin.partials.users.update');
     Route::get('/admin/users', [UserController::class, 'index'])->name('admin.partials.users.index');
     Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.partials.users.destroy');
-    Route::get('/admin/projects', [ProjectController::class, 'index'])->name('admin.partials.projects');
+    Route::get('/admin/projects', [ProjectController::class, 'index'])->name('admin.partials.projects.index');
     Route::get('/admin/categories', [CategoriesController::class, 'index'])->name('admin.partials.categories.index');
     Route::get('/admin/categories/create', [CategoriesController::class, 'create'])->name('category.create');
     Route::post('/admin/categories/store', [CategoriesController::class, 'store'])->name('category.store');

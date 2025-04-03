@@ -56,4 +56,16 @@ class User extends Authenticatable
     {
         return $this->hasRole('admin');
     }
+
+    // relation avec les projets
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    // relation avec les donations
+    public function donations()
+    {
+        return $this->hasMany(Donation::class);
+    }
 }

@@ -9,34 +9,50 @@ class Project extends Model
     protected $fillable = [
         'title', 
         'description', 
-        'goal_amount', 
-        'raised_amount', 
+        'goal_amount',
+        'category_id', 
+        'user_id',
         'start_date', 
         'end_date',
-        'category_id',
-        'user_id',
-        'image'
+        'image',
+        'validated',
     ];
 
-    // Relation avec l'utilisateur (si tu utilises un modèle User)
+   /**
+     * Relation avec le modèle User (porteur de projet)
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Relation avec les donations
+    /**
+     * Relation avec les donations
+     */
     public function donations()
     {
         return $this->hasMany(Donation::class);
     }
 
-    // Relation avec les paliers
-    public function tiers()
+    /**
+     * Relation avec les reward tiers (niveaux de récompense)
+     */
+    public function rewardTiers()
     {
-        return $this->hasMany(Tier::class);
+        return $this->hasMany(RewardTier::class);
     }
 
-    // Relation avec le type de projet
+    /**
+     * Relation avec les project levels (niveaux de projet)
+     */
+    public function projectLevels()
+    {
+        return $this->hasMany(ProjectLevel::class);
+    }
+
+    /**
+     * Relation avec la catégorie
+     */
     public function category()
     {
         return $this->belongsTo(Categories::class);

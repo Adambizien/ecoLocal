@@ -22,8 +22,10 @@ class Donation extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function tier()
+
+    public function tiers()
     {
-        return $this->belongsTo(Tier::class);
+        return $this->belongsToMany(Tier::class, 'donation_tier');
     }
+
 }

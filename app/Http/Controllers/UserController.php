@@ -7,11 +7,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        $users = User::all();
-        return view('admin.partials.users.index', compact('users'));
-    }
+   
 
     public function edit(User $user)
     {
@@ -23,7 +19,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
-            'role' => 'required|in:admin,user',
+            'role' => 'required|in:admin,user,project_leader',
         ]);
 
         $user->update($request->only(['name', 'email', 'role']));

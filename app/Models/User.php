@@ -57,13 +57,16 @@ class User extends Authenticatable
         return $this->hasRole('admin');
     }
 
-    // relation avec les projets
+    public function isProjectLeader(): bool
+    {
+        return $this->hasRole('project_leader');
+    }
+
     public function projects()
     {
         return $this->hasMany(Project::class);
     }
 
-    // relation avec les donations
     public function donations()
     {
         return $this->hasMany(Donation::class);

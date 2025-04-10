@@ -17,14 +17,14 @@
                 <li class="nav-item">
                     <a class="nav-link text-white fs-6 mx-2" href="#">À propos</a>
                 </li>
-                @if (Auth::check() && !Auth::user()->isAdmin())
+                @if (Auth::check() && Auth::user()->isProjectLeader())
                     <li class="nav-item d-none d-lg-block my-1">
-                        <a class="btn btn-light text-success fs-6 mx-2" href="{{ route('project.create') }}">
+                        <a class="btn btn-light text-success fs-6 mx-2" href="{{ route('project-leader.project.create') }}">
                             <i class="bi bi-plus-circle"></i> Créer un Projet
                         </a>
                     </li>
                     <li class="nav-item d-lg-none my-1">
-                        <a class="btn btn-light text-success fs-6 w-100" style="max-width: 200px; display: block; margin: auto;" href="{{ route('project.create') }}">
+                        <a class="btn btn-light text-success fs-6 w-100" style="max-width: 200px; display: block; margin: auto;" href="{{ route('project-leader.project.create') }}">
                             <i class="bi bi-plus-circle"></i> Créer un Projet
                         </a>
                     </li>
@@ -56,6 +56,13 @@
                                     </a>
                                 </li>
                             @endif
+                            @if (Auth::check() && Auth::user()->isProjectLeader())
+                                <li>
+                                    <a class="dropdown-item fs-6" href="{{ route('project-leader.index') }}">
+                                        <i class="bi bi-speedometer2"></i> Menu Porteur de Projet
+                                    </a>
+                                </li>
+                            @endif
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -76,6 +83,13 @@
                         <li class="nav-item d-lg-none my-1">
                             <a class="btn btn-light text-success fs-6 w-100" style="max-width: 200px; display: block; margin: auto;" href="{{ route('admin.partials.users.index') }}">
                                 <i class="bi bi-speedometer2"></i> Menu Admin
+                            </a>
+                        </li>
+                    @endif
+                    @if (Auth::check() && Auth::user()->isProjectLeader())
+                        <li class="nav-item d-lg-none my-1">
+                            <a class="btn btn-light text-success fs-6 w-100" style="max-width: 200px; display: block; margin: auto;" href="{{ route('project-leader.index') }}">
+                                <i class="bi bi-speedometer2"></i> Menu Porteur de Projet
                             </a>
                         </li>
                     @endif

@@ -14,17 +14,16 @@ class RewardTier extends Model
         'minimum_amount',
     ];
 
-    /**
-     * Un RewardTier appartient à un projet
-     */
+
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
     }
-
-      // Relation with donations
-      public function donations()
-      {
-          return $this->belongsToMany(Donation::class, 'donation_tier');
-      }
+    
+    public function donations()
+    {
+        return $this->belongsToMany(Donation::class, 'donation_reward_tier')
+                ->withPivot('is_received')
+                ->withTimestamps();
+    }
 }

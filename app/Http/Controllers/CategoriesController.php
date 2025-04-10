@@ -8,14 +8,10 @@ use Illuminate\Http\Request;
 class CategoriesController extends Controller
 {
     
-    public function index()
-    {
-        $categories = Categories::all();
-        return view('admin.partials.categories.index', compact('categories'));
-    }
     public function destroy(Categories $category)
     {
         $category->delete();
+        
         return redirect()->route('admin.partials.categories.index')->with('success', 'Catégorie supprimée avec succès.');
     }
     public function edit(Categories $category)
@@ -50,7 +46,7 @@ class CategoriesController extends Controller
 
 
         Categories::create([
-            'title' => $request->name,
+            'name' => $request->name,
         ]);
 
         return redirect()->route('admin.partials.categories.index')->with('success', 'Catégorie créée avec succès.');

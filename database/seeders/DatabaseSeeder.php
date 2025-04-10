@@ -2,12 +2,15 @@
 
 namespace Database\Seeders;
 
+use App\Models\Categories;
 use Illuminate\Database\Seeder;
 use App\Models\Project;
-use App\Models\Tier;
 use App\Models\Donation;
+use App\Models\ProjectLevel;
+use App\Models\RewardTier;
 use App\Models\User;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,54 +18,144 @@ class DatabaseSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        // Créer un utilisateur de test si aucun n'existe
-        if (User::count() === 0) {
-            User::factory()->create([
-                'name' => 'Test User',
-                'email' => 'test@example.com',
-            ]);
+        // Création des catégories
+        $categories = [
+            'Technologie',
+            'Art & Création',
+            'Environnement',
+            'Éducation',
+            'Santé'
+        ];
 
-            User::factory(9)->create();
+        foreach ($categories as $categoryName) {
+            Categories::create(['name' => $categoryName]);
         }
 
-        $users = User::pluck('id')->toArray();
+        // Création de l'admin
+        User::firstOrCreate(
+            ['email' => 'admin@example.com'],
+            [
+                'name' => 'Admin',
+                'password' => Hash::make('password'),
+                'role' => 'admin',
+            ]
+        );
 
-        if (empty($users)) {
-            $this->command->warn('Aucun utilisateur trouvé. Crée d\'abord des utilisateurs.');
-            return;
+        // Création des porteurs de projet
+        $projectLeaders = [];
+        for ($i = 0; $i < 5; $i++) {
+            $projectLeaders[] = User::create([
+                'name' => $faker->name,
+                'email' => $faker->unique()->safeEmail,
+                'password' => Hash::make('password'),
+                'role' => 'project_leader',
+            ]);
         }
 
-        // Créer 10 projets aléatoires
-        for ($i = 0; $i < 10; $i++) {
-            $project = Project::create([
-                'title' => $faker->sentence(3),
-                'description' => $faker->paragraph(),
-                'goal_amount' => $faker->randomFloat(2, 1000, 10000),
-                'raised_amount' => 0,
-                'start_date' => $faker->date(),
-                'end_date' => $faker->date(),
-                'status' => $faker->randomElement(['en cours', 'terminé', 'annulé']),
-                'user_id' => $faker->randomElement($users)
+        // Création des contributeurs
+        $contributors = [];
+        for ($i = 0; $i < 15; $i++) {
+            $contributors[] = User::create([
+                'name' => $faker->name,
+                'email' => $faker->unique()->safeEmail,
+                'password' => Hash::make('password'),
+                'role' => 'user',
             ]);
+        }
 
-            // Créer 3 paliers pour chaque projet
-            for ($j = 0; $j < 3; $j++) {
-                $tier = Tier::create([
+        // Création des projets
+        $projects = [];
+        foreach ($projectLeaders as $leader) {
+            for ($i = 0; $i < 2; $i++) {
+                $projects[] = Project::create([
+                    'user_id' => $leader->id,
+                    'category_id' => Categories::inRandomOrder()->first()->id,
+                    'title' => $faker->sentence,
+                    'description' => $faker->paragraphs(3, true),
+                    'goal_amount' => rand(5000, 20000),
+                    'start_date' => now()->subDays(rand(1, 30)),
+                    'end_date' => now()->addDays(rand(30, 90)),
+                    'validated' => true,
+                ]);
+            }
+        }
+
+        // Création des paliers pour chaque projet
+        foreach ($projects as $project) {
+            $levels = [
+                ['title' => 'Premier palier', 'percentage' => 0.2],
+                ['title' => 'Palier intermédiaire', 'percentage' => 0.5],
+                ['title' => 'Objectif principal', 'percentage' => 1],
+                ['title' => 'Stretch goal 1', 'percentage' => 1.2],
+                ['title' => 'Stretch goal 2', 'percentage' => 1.5],
+            ];
+
+            foreach (array_slice($levels, 0, rand(3, 5)) as $level) {
+                ProjectLevel::create([
                     'project_id' => $project->id,
-                    'title' => 'Palier ' . ($j + 1),
-                    'goal_amount' => $faker->randomFloat(2, 500, 5000),
-                    'description' => $faker->sentence()
+                    'title' => $level['title'],
+                    'description' => "Atteindre ".($level['percentage']*100)."% de l'objectif pour débloquer cette étape",
+                    'target_amount' => $project->goal_amount * $level['percentage'],
                 ]);
             }
 
-            // Créer 5 donations pour chaque projet
-            for ($k = 0; $k < 5; $k++) {
-                Donation::create([
+            // Création des niveaux de récompense
+            $tiers = [
+                ['title' => 'Soutien de base', 'amount' => 10],
+                ['title' => 'Contributeur actif', 'amount' => 50],
+                ['title' => 'Super contributeur', 'amount' => 100],
+                ['title' => 'Mécène', 'amount' => 250],
+                ['title' => 'Partenaire premium', 'amount' => 500],
+            ];
+
+            foreach (array_slice($tiers, 0, rand(3, 5)) as $tier) {
+                RewardTier::create([
                     'project_id' => $project->id,
-                    'amount' => $faker->randomFloat(2, 10, 500),
-                    'user_id' => $faker->randomElement($users)
+                    'title' => $tier['title'],
+                    'description' => "Contreparties spéciales pour les dons de {$tier['amount']}€ et plus",
+                    'minimum_amount' => $tier['amount'],
                 ]);
             }
+        }
+
+        // Création des dons
+        foreach ($projects as $project) {
+            $contributorsForProject = array_rand($contributors, rand(5, 10));
+            
+            foreach ($contributorsForProject as $contributorIndex) {
+                $donationsPerUser = rand(1, 3);
+                
+                for ($i = 0; $i < $donationsPerUser; $i++) {
+                    $amount = rand(5, 500);
+                    $donation = Donation::create([
+                        'user_id' => $contributors[$contributorIndex]->id,
+                        'project_id' => $project->id,
+                        'amount' => $amount,
+                        'created_at' => now()->subDays(rand(0, 30)),
+                    ]);
+
+                    // Associer les récompenses éligibles
+                    $eligibleTiers = RewardTier::where('project_id', $project->id)
+                        ->where('minimum_amount', '<=', $amount)
+                        ->get();
+
+                    if ($eligibleTiers->isNotEmpty()) {
+                        $donation->rewardTiers()->attach(
+                            $eligibleTiers->random(rand(1, $eligibleTiers->count()))->pluck('id')->toArray()
+                        );
+                    }
+                }
+            }
+        }
+
+        // Création d'utilisateurs supplémentaires
+        for ($i = 0; $i < 5; $i++) {
+            User::create([
+                'name' => $faker->name,
+                'email' => $faker->unique()->safeEmail,
+                'password' => Hash::make('password'),
+                'role' => 'user',
+            ]);
         }
     }
 }

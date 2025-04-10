@@ -23,9 +23,13 @@ class Donation extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function tiers()
+    public function rewardTiers()
     {
-        return $this->belongsToMany(Tier::class, 'donation_tier');
+        return $this->belongsToMany(RewardTier::class, 'donation_reward_tier')
+                ->withPivot('is_received')
+                ->withTimestamps();
     }
+
+
 
 }

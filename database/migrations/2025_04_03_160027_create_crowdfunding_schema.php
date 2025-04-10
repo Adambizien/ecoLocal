@@ -79,21 +79,19 @@ return new class extends Migration
             $table->timestamp('failed_at')->useCurrent();
         });
 
-        // Table categories
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();
         });
 
-        // Table projects
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('description');
             $table->decimal('goal_amount', 10, 2);
-            $table->foreignId('category_id')->constrained('categories');
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->date('start_date');
             $table->date('end_date');
             $table->string('image')->nullable();
@@ -101,7 +99,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Table project_levels
         Schema::create('project_levels', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
@@ -111,7 +108,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Table reward_tiers
         Schema::create('reward_tiers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
@@ -120,22 +116,22 @@ return new class extends Migration
             $table->decimal('minimum_amount', 10, 2);
             $table->timestamps();
         });
-
-        // Table donations
+        
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
             $table->decimal('amount', 10, 2);
-            $table->foreignId('project_id')->constrained('projects');
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
 
-        // Table pivot donation_tier
-        Schema::create('donation_tier', function (Blueprint $table) {
+        Schema::create('donation_reward_tier', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('donation_id')->constrained('donations')->onDelete('cascade');
-            $table->foreignId('tier_id')->constrained('reward_tiers')->onDelete('cascade');
+            $table->foreignId('donation_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('reward_tier_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
+            
+            $table->unique(['donation_id', 'reward_tier_id']);
         });
     }
 

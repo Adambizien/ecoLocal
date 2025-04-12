@@ -49,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/contributors/{user}', [ContributorController::class, 'showAdmin'])->name('admin.partials.contributors.show');
 
     // - statistics
-    Route::get('/admin/statistics', [StatsController::class, 'index'])->name('admin.partials.statistics.index');
+    Route::get('/admin/statistics', [StatsController::class, 'adminStats'])->name('admin.partials.statistics.index');
 
     //porteurs de projets :
     // - projets
@@ -61,20 +61,22 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/project-leader/project/{project}', [ProjectController::class, 'destroyProjectLeader'])->name('project-leader.project.destroy');
     
     // - contributions
-    Route::get('/project-leader/project-leader/contributions', [ProjectLeader::class, 'contributions'])->name('project-leader.contributions');
+    Route::get('/project-leader/contributions', [ProjectLeader::class, 'contributions'])->name('project-leader.contributions');
     Route::get('project-leader/contributors/{user}', [ContributorController::class, 'showProjectLeader'])->name('project-leader.contributors.show');
     
     // - statistics
-    Route::get('/project-leader/project-leader/statistics', [ProjectLeader::class, 'statistics'])->name('project-leader.statistics');
+    Route::get('/project-leader/statistics', [StatsController::class, 'projectLeaderStats'])->name('project-leader.statistics');
 
-    //projets : 
-    // Route::get('/create-project', [ProjectController::class, 'create'])->name('project.create');
-    // Route::post('/create-project', [ProjectController::class, 'store'])->name('project.store');
 
     //profils :
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //Historiques Donations
+    Route::get('/donations/history', [DonationController::class, 'history'])
+    ->middleware('auth')
+    ->name('donations.history');
 
 });
 

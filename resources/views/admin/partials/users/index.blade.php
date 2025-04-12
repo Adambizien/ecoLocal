@@ -4,7 +4,7 @@
 <div class="container-fluid px-0">
     <div class="row mx-0">
         <main class="col-12 px-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+            <div class="w-100 pt-3 pb-2 mb-3">
                 <h1 class="h2">Gestion des Utilisateurs</h1>
             </div>
 

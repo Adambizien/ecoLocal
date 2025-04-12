@@ -19,7 +19,6 @@ class CategoriesController extends Controller
         return view('admin.partials.categories.edit', compact('category'));
     }
 
-    // Traiter la mise à jour de la catégorie
     public function update(Request $request, Categories $category)
     {
         $request->validate([

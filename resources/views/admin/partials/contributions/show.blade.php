@@ -10,7 +10,6 @@
     </div>
 
     <div class="row">
-        <!-- Carte d'informations -->
         <div class="col-md-4">
             <div class="card mb-4 border-top-success">
                 <div class="card-header bg-success text-white">
@@ -26,8 +25,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Historique des dons en cartes -->
         <div class="col-md-8">
             <div class="card mb-4 border-top-success">
                 <div class="card-header bg-success text-white">

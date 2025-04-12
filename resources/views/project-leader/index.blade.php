@@ -3,7 +3,6 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar à gauche - fixe -->
             <div class="col-md-3 d-flex flex-column flex-shrink-0 p-3 text-bg-dark position-fixed vh-100">
                 <h3>Menu porteur de projet</h3>
                 <hr class="border-light">

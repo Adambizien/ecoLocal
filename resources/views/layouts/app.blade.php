@@ -11,11 +11,27 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-       
+        <style>
+
+            .mTM {
+                padding-top: 3.5rem;
+            }
+            @media (min-width: 768px) {
+                .mTM {
+                    padding-top: 4rem;
+                }
+            }
+            
+            @media (min-width: 992px) {
+                .mTM{
+                    padding-top: 4rem;
+                }
+            }
+        </style>
     </head>
     <body>
         @include('partials.navbar')
-        <div class="d-flex flex-column min-vh-100">
+        <div class="d-flex flex-column min-vh-100  mTM">
             <div class="w-100 flex-grow-1">
                 @yield('content')
             </div>

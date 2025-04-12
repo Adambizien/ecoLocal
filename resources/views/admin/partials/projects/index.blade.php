@@ -3,10 +3,10 @@
 @section('admin-content')
     <div class="container-fluid">
         <div class="row">
-            <main class="col-md-11 ms-sm-auto col-lg-12 px-md-4">
-                <div class="d-flex justify-content-between align-items-center mb-4 mt-3">
-                    <h1 class="h2">Gestion des Projets</h1>
-                    <a href="{{ route('admin.partials.projects.create') }}" class="btn btn-success ">
+            <main class="col-12 px-md-4">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 mt-3 gap-2">
+                    <h1 class="h2 mb-0">Gestion des Projets</h1>
+                    <a href="{{ route('admin.partials.projects.create') }}" class="btn btn-success">
                         <i class="fas fa-plus"></i> Créer un nouveau projet
                     </a>
                 </div>
@@ -39,13 +39,13 @@
                                 $percentage = $project->goal_amount > 0 ? min(round(($totalDonations / $project->goal_amount) * 100), 100) : 0;
                             @endphp
 
-                            <div class="col" style="padding-left: 15px; padding-right: 15px;">
-                                <div class="card border-1 rounded-3 shadow-sm project-card" style="background-color: #f8f9fa; width: 100%; transition: all 0.3s ease; transform: translateY(0);">
+                            <div class="col">
+                                <div class="card h-100 border-1 rounded-3 shadow-sm project-card" style="background-color: #f8f9fa; transition: all 0.3s ease;">
                                     <div class="position-relative">
                                         @if($project->image)
-                                            <img src="{{ asset('storage/' . $project->image) }}" class="card-img-top" alt="{{ $project->title }}" style="height: 150px; object-fit: cover; width: 100%;">
+                                            <img src="{{ asset('storage/' . $project->image) }}" class="card-img-top img-fluid" alt="{{ $project->title }}" style="height: 150px; object-fit: cover;">
                                         @else
-                                            <div class="d-flex justify-content-center align-items-center bg-light" style="height: 150px; width: 100%;">
+                                            <div class="d-flex justify-content-center align-items-center bg-light" style="height: 150px;">
                                                 <i class="fas fa-image fa-3x text-muted"></i>
                                             </div>
                                         @endif
@@ -57,39 +57,39 @@
                                                 {{ $project->category->name }}
                                             </span>
                                         @endif
-                                        <!-- Ajout de l'email du créateur -->
                                         <span class="badge bg-info position-absolute top-0 end-0 m-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Créateur du projet">
-                                            {{ $project->user->email }}
+                                            {{ Str::limit($project->user->email, 10) }}
                                         </span>
                                     </div>
 
-                                    <div class="card-body d-flex flex-column border-top border-1">
-                                        <h5 class="card-title">{{  Str::limit($project->title, 30) }}</h5>
-                                        <p class="card-text text-muted">{{ Str::limit($project->description, 100) }}</p>
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title">{{ Str::limit($project->title, 30) }}</h5>
+                                        <p class="card-text text-muted small">{{ Str::limit($project->description, 80) }}</p>
 
-                                        <div class="d-flex justify-content-between align-items-center text-muted small mb-2">
-                                            <span><i class="far fa-calendar-alt me-1"></i>{{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}</span>
-                                            <span class="mx-1">→</span> 
-                                            <span><i class="far fa-calendar-check me-1"></i>{{ \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') }}</span>
-                                        </div>
-
-                                        <div class="progress" style="height: 20px;">
-                                            <div class="progress-bar bg-success" role="progressbar"
-                                                style="width: {{ $percentage == 0 ? '0.5' : $percentage }}%" 
-                                                aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="mt-auto">
+                                            <div class="d-flex justify-content-between align-items-center text-muted small mb-2">
+                                                <span><i class="far fa-calendar-alt me-1"></i>{{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}</span>
+                                                <span class="mx-1">→</span> 
+                                                <span><i class="far fa-calendar-check me-1"></i>{{ \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') }}</span>
                                             </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between mt-2 small">
-                                            <span class="fw-bold text-success">{{ number_format($totalDonations, 2) }} €</span>
-                                            <span class="text-muted">{{ $percentage }}%</span>
-                                            <span class="text-muted">{{ number_format($project->goal_amount, 2) }} €</span>
+
+                                            <div class="progress" style="height: 20px;">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                    style="width: {{ $percentage == 0 ? '0.5' : $percentage }}%" 
+                                                    aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100">
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between mt-2 small">
+                                                <span class="fw-bold text-success">{{ number_format($totalDonations, 2) }} €</span>
+                                                <span class="text-muted">{{ $percentage }}%</span>
+                                                <span class="text-muted">{{ number_format($project->goal_amount, 2) }} €</span>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="card-footer bg-white border-top">
-                                        <div class="d-flex gap-2 mb-2">
-                                            <!-- Bouton de validation rapide -->
-                                            <form action="{{ route('admin.projects.toggle-validation', $project->id) }}" method="POST" class="flex-grow-1">
+                                        <div class="d-flex flex-wrap gap-2">
+                                            <form action="{{ route('admin.projects.toggle-validation', $project->id) }}" method="POST" class="flex-grow-1" style="min-width: 120px;">
                                                 @csrf
                                                 @method('PATCH')
                                                 <button type="submit" class="btn btn-sm {{ $project->validated ? 'btn-warning' : 'btn-success' }} w-100">
@@ -97,12 +97,12 @@
                                                     {{ $project->validated ? 'Invalider' : 'Valider' }}
                                                 </button>
                                             </form>
-                                        </div>
-                                        <div class="d-flex gap-2">
-                                            <a href="{{ route('admin.partials.projects.edit', $project->id) }}" class="btn btn-sm btn-warning flex-grow-1">
+                                            
+                                            <a href="{{ route('admin.partials.projects.edit', $project->id) }}" class="btn btn-sm btn-warning flex-grow-1" style="min-width: 100px;">
                                                 <i class="fas fa-edit me-1"></i> Modifier
                                             </a>
-                                            <form action="{{ route('admin.partials.projects.destroy', $project->id) }}" method="POST" class="flex-grow-1">
+                                            
+                                            <form action="{{ route('admin.partials.projects.destroy', $project->id) }}" method="POST" class="flex-grow-1" style="min-width: 100px;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger w-100" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce projet?')">
@@ -124,18 +124,38 @@
         .project-card:hover {
             transform: translateY(-5px) !important;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
-            transition: all 0.3s ease !important;
         }
         
         .project-card {
             transition: all 0.3s ease !important;
+        }
+        
+        @media (max-width: 768px) {
+            .card-title {
+                font-size: 1rem;
+            }
+            .card-text {
+                font-size: 0.8rem;
+            }
+            .btn-sm {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.75rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .row-cols-sm-2 {
+                grid-template-columns: repeat(1, 1fr);
+            }
+            .d-flex.justify-content-between.align-items-center.text-muted.small.mb-2 span {
+                font-size: 0.7rem;
+            }
         }
     </style>
 @endsection
 
 @push('scripts')
     <script>
-        // Activation des tooltips Bootstrap
         document.addEventListener('DOMContentLoaded', function() {
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
             var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {

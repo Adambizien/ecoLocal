@@ -57,7 +57,7 @@ class ProjectController extends Controller
             $project->description = $validated['description'];
             $project->goal_amount = $validated['goal_amount'];
             $project->category_id = $validated['category_id'];
-            $project->user_id = Auth::id(); // Assigner l'ID de l'utilisateur connecté directement
+            $project->user_id = Auth::id(); 
             $project->start_date = $validated['start_date'];
             $project->end_date = $validated['end_date'];
     
@@ -86,7 +86,7 @@ class ProjectController extends Controller
     
             DB::commit();
     
-            return redirect()->route('project-leader.index') // Corrigez cette route si nécessaire
+            return redirect()->route('project-leader.index')
                 ->with('success', 'Projet créé avec succès!');
     
         } catch (\Exception $e) {

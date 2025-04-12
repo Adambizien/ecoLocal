@@ -28,7 +28,6 @@ class ChangeValidatedToBooleanInProjectsTable extends Migration
     public function down()
     {
         Schema::table('projects', function (Blueprint $table) {
-            // Conversion inverse en cas de rollback
             $table->integer('validated')
                   ->default(0)
                   ->change();

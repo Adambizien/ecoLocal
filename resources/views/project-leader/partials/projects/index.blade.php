@@ -3,8 +3,8 @@
 @section('project-leader-content')
 <div class="container-fluid">
     <div class="row">
-        <main class="col-md-11 ms-sm-auto col-lg-12 px-md-4">
-            <div class="d-flex justify-content-between align-items-center mb-4 mt-2">
+        <main class="col-md-11 ms-sm-auto col-lg-12 px-md-4 mt-2">
+            <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="h2">Gestion des Projets</h1>
                 <a href="{{ route('project-leader.project.create') }}" class="btn btn-success ">
                     <i class="fas fa-plus"></i> Créer un nouveau projet

@@ -20,7 +20,6 @@
         @csrf
         @method('patch')
 
-        <!-- Name -->
         <div class="mb-3">
             <label for="name" class="form-label">{{ __('Nom') }}</label>
             <input 
@@ -38,7 +37,6 @@
             @enderror
         </div>
 
-        <!-- Email -->
         <div class="mb-3">
             <label for="email" class="form-label">{{ __('Email') }}</label>
             <input 
@@ -73,7 +71,6 @@
             @endif
         </div>
 
-        <!-- Save Button -->
         <div class="d-flex justify-content-end">
             <button type="submit" class="btn btn-primary">{{ __('Enregistrer') }}</button>
         </div>

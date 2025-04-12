@@ -12,12 +12,10 @@ class Donation extends Model
         'user_id',
     ];
 
-    // Relation avec le projet
     public function project()
     {
         return $this->belongsTo(Project::class);
     }
-    // Relation avec l'utilisateur
     public function user()
     {
         return $this->belongsTo(User::class);

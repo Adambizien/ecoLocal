@@ -19,7 +19,7 @@ class ContributorController extends Controller
 
     public function showProjectLeader(User $user)
     {
-        // le projet leader peux voir que les contirbuteurs que de ses projets sinon erreur 403
+
         if ($user->donations->isNotEmpty()) {
             $user->donations->each(function($donation) {
                 if ($donation->project->user_id !== auth()->id()) {

@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        // Création des catégories
         $categories = [
             'Technologie',
             'Art & Création',
@@ -31,7 +30,6 @@ class DatabaseSeeder extends Seeder
             Categories::create(['name' => $categoryName]);
         }
 
-        // Création de l'admin
         User::firstOrCreate(
             ['email' => 'admin@example.com'],
             [
@@ -41,7 +39,6 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Création des porteurs de projet
         $projectLeaders = [];
         for ($i = 0; $i < 5; $i++) {
             $projectLeaders[] = User::create([
@@ -52,7 +49,6 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // Création des contributeurs
         $contributors = [];
         for ($i = 0; $i < 15; $i++) {
             $contributors[] = User::create([
@@ -63,7 +59,6 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // Création des projets
         $projects = [];
         foreach ($projectLeaders as $leader) {
             for ($i = 0; $i < 2; $i++) {
@@ -80,7 +75,6 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        // Création des paliers pour chaque projet
         foreach ($projects as $project) {
             $levels = [
                 ['title' => 'Premier palier', 'percentage' => 0.2],
@@ -99,7 +93,6 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
 
-            // Création des niveaux de récompense
             $tiers = [
                 ['title' => 'Soutien de base', 'amount' => 10],
                 ['title' => 'Contributeur actif', 'amount' => 50],
@@ -118,7 +111,6 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        // Création des dons
         foreach ($projects as $project) {
             $contributorsForProject = array_rand($contributors, rand(5, 10));
             
@@ -134,7 +126,6 @@ class DatabaseSeeder extends Seeder
                         'created_at' => now()->subDays(rand(0, 30)),
                     ]);
 
-                    // Associer les récompenses éligibles
                     $eligibleTiers = RewardTier::where('project_id', $project->id)
                         ->where('minimum_amount', '<=', $amount)
                         ->get();
@@ -148,7 +139,6 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        // Création d'utilisateurs supplémentaires
         for ($i = 0; $i < 5; $i++) {
             User::create([
                 'name' => $faker->name,

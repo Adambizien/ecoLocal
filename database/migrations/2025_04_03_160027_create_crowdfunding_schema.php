@@ -137,7 +137,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        // Suppression dans l'ordre inverse de création pour respecter les contraintes
         Schema::dropIfExists('donation_tier');
         Schema::dropIfExists('donations');
         Schema::dropIfExists('reward_tiers');

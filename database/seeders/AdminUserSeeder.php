@@ -15,7 +15,6 @@ class AdminUserSeeder extends Seeder
      */
     public function run()
     {
-        // Create an admin user
         User::create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
@@ -23,7 +22,6 @@ class AdminUserSeeder extends Seeder
             'role' => 'admin',
         ]);
 
-        // Create a regular user
         User::create([
             'name' => 'Regular User',
             'email' => 'test@exemple.com',
@@ -31,7 +29,6 @@ class AdminUserSeeder extends Seeder
             'role' => 'user',
         ]);
 
-        // Create a project leader
         User::create([
             'name' => 'Project Leader',
             'email' => 'leader@exemple.com',

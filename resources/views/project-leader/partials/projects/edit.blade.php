@@ -115,7 +115,6 @@
                             </div>
                         </div>
 
-                        <!-- Section pour les Project Levels -->
                         <div class="mt-5">
                             <h3 class="h4 mb-4 border-bottom pb-2">Niveaux du projet</h3>
                             <div id="projectLevels-container" class="row g-3">
@@ -166,7 +165,6 @@
                             </div>
                         </div>
 
-                        <!-- Section pour les Reward Tiers -->
                         <div class="mt-5">
                             <h3 class="h4 mb-4 border-bottom pb-2">Récompenses</h3>
                             <div id="rewards-container" class="row g-3">
@@ -270,7 +268,6 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Gestion des projectLevels
     let projectLevelIndex = {{ count(old('projectLevels', $project->projectLevels ?: [])) }};
     document.getElementById('add-projectLevel').addEventListener('click', function() {
         const template = document.querySelector('.level-item');
@@ -279,8 +276,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const levelItem = template.cloneNode(true);
         const cardBody = levelItem.querySelector('.card-body');
         const inputs = cardBody.querySelectorAll('input, textarea');
-        
-        // Mise à jour des noms et valeurs
+
         inputs.forEach(input => {
             const name = input.name.replace(/\[\d+\]/, `[${projectLevelIndex}]`);
             input.name = name;
@@ -289,15 +285,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Suppression de l'ID caché pour les nouveaux projectLevels
         const hiddenInput = cardBody.querySelector('input[type="hidden"]');
         if (hiddenInput) hiddenInput.remove();
         
-        // Affichage du bouton supprimer
         const removeBtn = cardBody.querySelector('.remove-projectLevel');
         if (removeBtn) removeBtn.classList.remove('d-none');
         
-        // Gestion de la suppression
         if (removeBtn) {
             removeBtn.addEventListener('click', function() {
                 if (document.querySelectorAll('.level-item').length > 1) {
@@ -308,7 +301,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
-        // Réinitialisation des classes d'erreur
         cardBody.querySelectorAll('.is-invalid').forEach(el => {
             el.classList.remove('is-invalid');
         });
@@ -320,7 +312,6 @@ document.addEventListener('DOMContentLoaded', function() {
         projectLevelIndex++;
     });
 
-    // Gestion des récompenses
     let rewardIndex = {{ count(old('rewards', $project->rewardTiers ?: [])) }};
     document.getElementById('add-reward').addEventListener('click', function() {
         const template = document.querySelector('.reward-item');
@@ -364,7 +355,6 @@ document.addEventListener('DOMContentLoaded', function() {
         rewardIndex++;
     });
 
-    // Gestion de la suppression d'image
     const imageInput = document.getElementById('image');
     const removeCheckbox = document.getElementById('remove_image');
     
@@ -382,7 +372,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Activation des boutons supprimer pour les éléments existants en cas d'erreur
     if (document.querySelectorAll('.is-invalid').length > 0) {
         document.querySelectorAll('.remove-projectLevel').forEach(btn => {
             btn?.classList.remove('d-none');
@@ -392,7 +381,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Gestion de la suppression pour les éléments existants
     document.querySelectorAll('.remove-projectLevel').forEach(btn => {
         btn?.addEventListener('click', function() {
             if (document.querySelectorAll('.level-item').length > 1) {

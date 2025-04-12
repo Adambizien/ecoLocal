@@ -8,21 +8,21 @@
     </div>
 @endif
 
-<div class="container-fluid">
-    <div class="row justify-content-center">
-        <main class="col-md-11 col-lg-10 px-md-4">
-            <div class="card shadow-sm mt-4">
-                <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-                    <h1 class="h2 mb-0">Modifier l'utilisateur</h1>
-                    <a href="{{ route('admin.partials.users.index') }}" class="btn text-white">
+<div class="container-fluid px-0 px-md-2">
+    <div class="row justify-content-center mx-0">
+        <main class="col-12 col-md-11 col-lg-10 px-2 px-md-3 px-lg-4">
+            <div class="card shadow-sm mt-3 mt-md-4">
+                <div class="card-header bg-success text-white d-flex justify-content-between align-items-center py-2 py-md-3">
+                    <h1 class="h4 h3-md h2-lg mb-0">Modifier l'utilisateur</h1>
+                    <a href="{{ route('admin.partials.users.index') }}" class="btn text-white py-1 py-md-2">
                         <i class="fas fa-arrow-left me-1"></i>
                     </a>
                 </div>
                 
-                <div class="card-body">
+                <div class="card-body p-2 p-md-3 p-lg-4">
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <ul class="mb-0">
+                            <ul class="mb-0 ps-3">
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
                                 @endforeach
@@ -35,18 +35,18 @@
                         @csrf
                         @method('PUT')
 
-                        <div class="row g-3">
-                            <div class="col-md-6">
+                        <div class="row g-2 g-md-3">
+                            <div class="col-12 col-md-6">
                                 <label for="name" class="form-label">Nom</label>
                                 <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $user->name) }}" required>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-12 col-md-6">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}" required>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-12 col-md-6">
                                 <label for="role" class="form-label">Rôle</label>
                                 <select class="form-select" id="role" name="role" required>
                                     <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
@@ -56,9 +56,8 @@
                             </div>
                         </div>
 
-                        <div class="mt-5 text-end">
-                            <button type="submit" class="btn btn-success btn-lg">Enregistrer les modifications</button>
-                            <a href="{{ route('admin.partials.users.index') }}" class="btn btn-secondary btn-lg">Annuler</a>
+                        <div class="mt-4 mt-md-5 text-center text-md-end">
+                            <button type="submit" class="btn btn-success">Enregistrer</button>
                         </div>
                     </form>
                 </div>
@@ -69,23 +68,52 @@
 
 <style>
     .card {
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 0.5rem;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     }
     
     .card-header {
-        border-radius: 10px 10px 0 0 !important;
+        border-radius: 0.5rem 0.5rem 0 0 !important;
     }
     
     .form-control, .form-select {
-        border-radius: 5px;
-        padding: 10px;
+        border-radius: 0.375rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .btn {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.875rem;
     }
     
-    @media (max-width: 768px) {
-        .btn-lg {
+    /* Ajustements pour très petits écrans */
+    @media (max-width: 576px) {
+        .card-header {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .card-header h1 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-body {
+            padding: 1rem;
+        }
+        
+        .btn {
             width: 100%;
-            margin-bottom: 10px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .ms-2 {
+            margin-left: 0 !important;
+        }
+    }
+    
+    @media (min-width: 576px) and (max-width: 768px) {
+        .card-header {
+            padding: 0.75rem 1rem;
         }
     }
 </style>

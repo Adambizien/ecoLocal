@@ -12,8 +12,8 @@
     <div class="row justify-content-center">
         <main class="col-md-11 col-lg-10 px-md-4">
             <div class="card shadow-sm mt-4">
-                <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-                    <h1 class="h2 mb-0">Créer une nouvelle catégorie</h1>
+                <div class="card-header bg-success text-white d-flex justify-content-between align-items-center py-2 py-md-3">
+                    <h1 class="h4 h3-md h2-lg mb-0">Créer une nouvelle catégorie</h1>
                     <a href="{{ route('admin.partials.categories.index') }}" class="btn text-white">
                         <i class="fas fa-arrow-left me-1"></i>
                     </a>
@@ -42,8 +42,7 @@
                         </div>
 
                         <div class="mt-5 text-end">
-                            <button type="submit" class="btn btn-success btn-lg">Créer</button>
-                            <a href="{{ route('admin.partials.categories.index') }}" class="btn btn-secondary btn-lg">Annuler</a>
+                            <button type="submit" class="btn btn-success">Créer</button>
                         </div>
                     </form>
                 </div>

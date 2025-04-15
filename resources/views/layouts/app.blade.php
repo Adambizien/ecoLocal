@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>ÉcoLocal</title>
+        <link rel="icon" href="{{ asset('images/ecolocal-logo.png') }}" type="image/png">
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -18,13 +19,13 @@
             }
             @media (min-width: 768px) {
                 .mTM {
-                    padding-top: 4rem;
+                    padding-top: 3.7rem;
                 }
             }
             
             @media (min-width: 992px) {
                 .mTM{
-                    padding-top: 4rem;
+                    padding-top: 3.7rem;
                 }
             }
         </style>
@@ -42,6 +43,5 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
-        @stack('scripts')
     </body>
 </html>

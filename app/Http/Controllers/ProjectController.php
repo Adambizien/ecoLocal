@@ -8,6 +8,7 @@ use App\Models\Categories;
 use App\Models\ProjectLevel;
 use App\Models\RewardTier;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -431,4 +432,61 @@ class ProjectController extends Controller
         
         return back()->with('success', 'Statut de validation mis à jour avec succès');
     }
+
+    public function show(Project $project)
+    {
+        $project->load([
+            'user',
+            'category',
+            'rewardTiers' => function ($query) {
+                $query->orderBy('minimum_amount', 'asc');
+            },
+            'projectLevels' => function ($query) {
+                $query->orderBy('target_amount', 'asc');
+            },
+            'donations' => function ($query) {
+                $query->with('user')
+                      ->orderBy('created_at', 'desc');
+            }
+        ]);
+
+        $totalDonations = $project->donations->sum('amount');
+        $progressPercentage = $project->goal_amount > 0 ? min(round(($totalDonations / $project->goal_amount) * 100), 100) : 0;
+
+        return view('projects.show', [
+            'project' => $project,
+            'totalDonations' => $totalDonations,
+            'progressPercentage' => $progressPercentage,
+        ]);
+    }
+
+    public function indexPublic(Request $request)
+{
+    $categories = Categories::all();
+
+    $query = Project::with(['category', 'donations', 'user'])
+        ->where('validated', true)
+        ->where('end_date', '>', Carbon::now())
+        ->orderBy('created_at', 'desc');
+
+    if ($request->has('search') && !empty($request->search)) {
+        $query->where('title', 'like', '%' . $request->search . '%')
+              ->orWhere('description', 'like', '%' . $request->search . '%');
+    }
+
+    if ($request->has('category') && !empty($request->category)) {
+        $query->where('category_id', $request->category);
+    }
+
+    $projects = $query->get()->map(function ($project) {
+        $project->days_remaining = Carbon::now()->diffInDays(Carbon::parse($project->end_date), false);
+        $project->totalDonations = $project->donations->sum('amount');
+        $project->percentage = $project->goal_amount > 0 
+            ? min(round(($project->totalDonations / $project->goal_amount) * 100), 100) 
+            : 0;
+        return $project;
+    });
+
+    return view('projects.index-public', compact('projects', 'categories'));
+}
 }

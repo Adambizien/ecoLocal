@@ -6,16 +6,22 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\DonationController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectLeader;
 use App\Http\Controllers\StatsController;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [
+    HomeController::class,
+    'index'
+])->name('home');
 
 
+// show projects
+Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
+Route::get('/projects', [ProjectController::class, 'indexPublic'])->name('public.projects.index');
 
 Route::middleware(['auth'])->group(function () {
     //admin :
@@ -77,6 +83,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/donations/history', [DonationController::class, 'history'])
     ->middleware('auth')
     ->name('donations.history');
+
+
+   
 
 });
 

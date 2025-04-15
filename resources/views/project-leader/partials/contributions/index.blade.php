@@ -63,22 +63,3 @@
 </div>
 @endsection
 
-@push('styles')
-<style>
-    .border-top-success {
-        border-top: 4px solid #1cc88a !important;
-    }
-    .card-hover:hover {
-        transform: translateY(-5px);
-        transition: transform 0.3s ease;
-    }
-    .btn-success {
-        background-color: #1cc88a;
-        border-color: #1cc88a;
-    }
-    .btn-success:hover {
-        background-color: #17a673;
-        border-color: #169b6b;
-    }
-</style>
-@endpush

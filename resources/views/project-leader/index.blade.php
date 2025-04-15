@@ -10,7 +10,7 @@
         </button>
 
         <div class="col-md-3 d-flex flex-column flex-shrink-0 p-3 text-bg-dark sidebar" id="sidebar" style="min-height: 110vh;">
-            <h3>Menu Admin</h3>
+            <h3>Menu Porteur de Projet</h3>
             <hr class="border-light">
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">

@@ -39,37 +39,39 @@
                         <div class="row">
                             @foreach($user->donations as $donation)
                             <div class="col-md-6 mb-3">
-                                <div class="card h-100 shadow-sm">
-                                    <div class="card-header bg-light">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-bold">{{ $donation->created_at->format('d/m/Y H:i') }}</span>
-                                            <span class="badge bg-success">{{ number_format($donation->amount, 2) }} €</span>
+                                <a href="{{ route('projects.show',  $donation->project->id) }}" class="text-decoration-none text-dark">
+                                    <div class="card multicard h-100 shadow-sm">
+                                        <div class="card-header bg-light">
+                                            <div class="d-flex justify-content-between">
+                                                <span class="fw-bold">{{ $donation->created_at->format('d/m/Y H:i') }}</span>
+                                                <span class="badge bg-success">{{ number_format($donation->amount, 2) }} €</span>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title text-truncate" style="max-width: 100%;" title="{{ $donation->project->title }}">
+                                                {{ $donation->project->title }}
+                                            </h5>
+                                            
+                                            <div class="mt-3">
+                                                <h6 class="fw-bold">Récompenses :</h6>
+                                                @if($donation->rewardTiers->isNotEmpty())
+                                                    <ul class="list-group list-group-flush">
+                                                        @foreach($donation->rewardTiers as $reward)
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                            {{ $reward->title }}
+                                                            <span class="badge {{ $reward->pivot->is_received ? 'bg-success' : 'bg-warning' }}">
+                                                                {{ $reward->pivot->is_received ? 'Reçu' : 'Non reçu' }}
+                                                            </span>
+                                                        </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @else
+                                                    <span class="text-muted">Aucune récompense</span>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title text-truncate" style="max-width: 100%;" title="{{ $donation->project->title }}">
-                                            {{ $donation->project->title }}
-                                        </h5>
-                                        
-                                        <div class="mt-3">
-                                            <h6 class="fw-bold">Récompenses :</h6>
-                                            @if($donation->rewardTiers->isNotEmpty())
-                                                <ul class="list-group list-group-flush">
-                                                    @foreach($donation->rewardTiers as $reward)
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        {{ $reward->title }}
-                                                        <span class="badge {{ $reward->pivot->is_received ? 'bg-success' : 'bg-warning' }}">
-                                                            {{ $reward->pivot->is_received ? 'Reçu' : 'Non reçu' }}
-                                                        </span>
-                                                    </li>
-                                                    @endforeach
-                                                </ul>
-                                            @else
-                                                <span class="text-muted">Aucune récompense</span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                             @endforeach
                         </div>
@@ -79,26 +81,14 @@
         </div>
     </div>
 </div>
-@endsection
-
-@push('styles')
 <style>
-    .border-top-success {
-        border-top: 4px solid #1cc88a !important;
+    .multicard {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .border-top-info {
-        border-top: 4px solid #36b9cc !important;
-    }
-    .card {
-        transition: transform 0.2s ease;
-    }
-    .card:hover {
-        transform: translateY(-3px);
-    }
-    .text-truncate {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+
+    .multicard:hover {
+        transform: translateY(-3px) !important;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
     }
 </style>
-@endpush
+@endsection

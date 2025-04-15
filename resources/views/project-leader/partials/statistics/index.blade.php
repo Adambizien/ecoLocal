@@ -84,9 +84,6 @@
         </main>
     </div>
 </div>
-@endsection
-
-@push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -179,33 +176,4 @@
        
     });
 </script>
-@endpush
-
-@push('styles')
-<style>
-    .card {
-        border-radius: 0.75rem;
-        overflow: hidden;
-        border: none;
-        box-shadow: 0 0.15rem 1rem rgba(0, 0, 0, 0.05);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    
-    .card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
-    }
-    
-    .card-header {
-        font-weight: 600;
-        border-bottom: none;
-    }
-    
-    @media (max-width: 768px) {
-        .col-md-6, .col-lg-6 {
-            padding-left: 8px;
-            padding-right: 8px;
-        }
-    }
-</style>
-@endpush
+@endsection

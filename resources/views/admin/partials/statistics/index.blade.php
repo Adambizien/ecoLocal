@@ -137,9 +137,6 @@
         </main>
     </div>
 </div>
-@endsection
-
-@push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -274,65 +271,4 @@
         }).render();
     });
 </script>
-@endpush
-
-@push('styles')
-<style>
-    .card {
-        border-radius: 0.5rem;
-        overflow: hidden;
-        border: none;
-        box-shadow: 0 0.15rem 1rem rgba(0, 0, 0, 0.05);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    
-    .card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.1);
-    }
-    
-    .card-header {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        padding: 0.75rem 1.25rem;
-    }
-    
-    .row.mx-0 > .col {
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-    
-    @media (max-width: 768px) {
-        .row.mx-0 > .col {
-            flex: 0 0 50%;
-            max-width: 50%;
-        }
-    }
-    
-    @media (max-width: 576px) {
-        .row.mx-0 > .col {
-            flex: 0 0 100%;
-            max-width: 100%;
-        }
-        
-        .card-header {
-            padding: 0.5rem;
-        }
-        
-        .card-body {
-            padding: 1rem 0.5rem !important;
-        }
-    }
-    
-    .bg-success {
-        background-color: #27ae60 !important;
-    }
-    
-    .text-success {
-        color: #27ae60 !important;
-    }
-    
-    .alert {
-        transition: all 0.3s ease;
-    }
-</style>
-@endpush
+@endsection

@@ -3,8 +3,13 @@
 @section('content')
     <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
         <div class="card" style="width: 100%; max-width: 400px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="text-center mt-2">
+                <img src="{{ asset('images/ecolocal-logo.png') }}" 
+                    alt="Écolocal Logo" 
+                    height="80">
+            </div>
             <div class="card-body">
-                <h5 class="card-title text-center" style="color: #28a745;">{{ __('Inscription à Eco Local') }}</h5>
+                <h5 class="card-title text-center" style="color: #28a745;">{{ __('Inscription à ÉcoLocal') }}</h5>
                 @error('name')
                     <div class="text-danger mt-2">{{ $message }}</div>
                 @enderror

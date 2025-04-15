@@ -68,10 +68,6 @@
         transition: all 0.2s ease;
         border-radius: 8px;
     }
-    .card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-    }
     .card-header {
         background-color: rgba(0, 0, 0, 0.02);
     }

@@ -17,6 +17,9 @@ Route::get('/', [
     HomeController::class,
     'index'
 ])->name('home');
+Route::get('/a-propos', function () {
+    return view('about');
+})->name('about');
 
 
 // show projects
@@ -84,12 +87,10 @@ Route::middleware(['auth'])->group(function () {
     ->middleware('auth')
     ->name('donations.history');
 
-
-   
-
 });
 
 
 
 
 require __DIR__.'/auth.php';
+

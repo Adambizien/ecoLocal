@@ -15,7 +15,6 @@
                 </div>
             </div>
             <div class="col-lg-6 d-none d-lg-block">
-
                 <img src="{{ asset('images/image.png') }}" alt="Projets écologiques" class="img-fluid rounded shadow">
             </div>
         </div>
@@ -192,7 +191,7 @@
                                 <small class="text-muted">Ferme biologique "Les jardins de Marie"</small>
                             </div>
                         </div>
-                        <p class="card-text">"Grâce à ÉcoLocal, nous avons pu financer notre nouvelle serre écologique. La communauté est incroyablement bienveillante et engagée !"</p>
+                        <p class="card-text">Grâce à ÉcoLocal, j'ai pu financer la chasse au Zorah Magdaros et développer ma ferme de Palico dissident.😺 La communauté est incroyable et le soutien, inestimable !</p>
                     </div>
                 </div>
             </div>
@@ -207,7 +206,7 @@
                                 <small class="text-muted">Atelier de réparation vélo "CycleVert"</small>
                             </div>
                         </div>
-                        <p class="card-text">"La plateforme ÉcoLocal nous a permis de rencontrer des contributeurs passionnés par la mobilité douce. Un vrai succès pour notre atelier !"</p>
+                        <p class="card-text">La plateforme ÉcoLocal, wallah elle est trop bien !</p>
                     </div>
                 </div>
             </div>
@@ -222,7 +221,7 @@
                                 <small class="text-muted">Épicerie zéro déchet "La Graine"</small>
                             </div>
                         </div>
-                        <p class="card-text">"L'équipe d'ÉcoLocal nous a accompagnés pas à pas dans notre campagne. Aujourd'hui notre épicerie est ouverte grâce à 150 contributeurs !"</p>
+                        <p class="card-text">← Il a juré wallah, c'est que c'est carré !</p>
                     </div>
                 </div>
             </div>
@@ -270,6 +269,36 @@
     
     .project-card:hover .card-img-top {
         transform: scale(1.05);
+    }
+
+    @media (max-width: 767px) {
+        .hero-section .btn-lg,
+        .btn-lg {
+            padding: 0.5rem 1rem !important;
+            font-size: 1rem !important;
+        }
+        
+        .d-flex.gap-3 {
+            gap: 1rem !important;
+        }
+        
+        .bg-success .btn-lg {
+            padding: 0.5rem 1.5rem !important;
+            margin-bottom: 0.5rem;
+        }
+
+        .bg-success .d-flex {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-section h1 {
+            font-size: 2rem;
+        }
+        
+        .hero-section .lead {
+            font-size: 1.1rem;
+        }
     }
 </style>
 @endsection

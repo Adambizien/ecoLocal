@@ -6,7 +6,6 @@ use App\Models\Project;
 use App\Models\Donation;
 use App\Models\Categories;
 use App\Models\User;
-use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

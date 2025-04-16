@@ -21,7 +21,7 @@
                     <a class="nav-link text-white fs-6 mx-2 {{ request()->routeIs('public.projects.index') || request()->routeIs('projects.show') ? 'active fw-bold' : '' }}" href="{{ route('public.projects.index') }}">Projets</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white fs-6 mx-2 {{ request()->routeIs('about') ? 'active fw-bold' : '' }}" href="#">À propos</a>
+                    <a class="nav-link text-white fs-6 mx-2 {{ request()->routeIs('about') ? 'active fw-bold' : '' }}" href="{{ route('about') }}">À propos</a>
                 </li>
                 @if (Auth::check() && Auth::user()->isProjectLeader())
                     <li class="nav-item d-none d-lg-block my-1">

@@ -86,7 +86,6 @@
         font-size: 0.875rem;
     }
     
-    /* Ajustements pour très petits écrans */
     @media (max-width: 576px) {
         .card-header {
             flex-direction: column;

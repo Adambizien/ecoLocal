@@ -14,9 +14,6 @@ class ProjectLevel extends Model
         'target_amount',
     ];
 
-    /**
-     * Un ProjectLevel appartient à un projet
-     */
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);

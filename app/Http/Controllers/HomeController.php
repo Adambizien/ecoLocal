@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Categories;
 use App\Models\Project;
 use App\Models\Donation;
-use Illuminate\Http\Request;
 
 
 class HomeController extends Controller

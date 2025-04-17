@@ -42,7 +42,7 @@
                             @else
                                 <div class="card-img-top d-flex justify-content-center align-items-center bg-light border-bottom border-1" 
                                     style="height: 180px;">
-                                    <i class="fas fa-image fa-3x text-muted"></i>
+                                    <i class="fas fa-leaf text-success fs-3"></i>
                                 </div>
                             @endif
                             @if($project->category)

@@ -46,7 +46,7 @@
                                             <img src="{{ asset('storage/' . $project->image) }}" class="card-img-top" alt="{{ $project->title }}" style="height: 150px; object-fit: cover; width: 100%;">
                                         @else
                                             <div class="d-flex justify-content-center align-items-center bg-light" style="height: 150px; width: 100%;">
-                                                <i class="fas fa-image fa-3x text-muted"></i>
+                                                <i class="fas fa-leaf text-success fs-3"></i>
                                             </div>
                                         @endif
                                         <span class="badge {{ $project->validated ? 'bg-success' : 'bg-warning' }} position-absolute top-0 start-0 m-2">

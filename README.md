@@ -16,7 +16,8 @@ EcoLocal est une plateforme de financement participatif dédiée aux projets à 
 
 La base de données est organisée autour des entités principales suivantes :
 
-![image](https://github.com/user-attachments/assets/e7a4bee3-d918-4180-8a57-1404f3530150)
+![WhatsApp Image 2025-04-18 à 17 55 58_7f4de1b1](https://github.com/user-attachments/assets/056bc407-3a98-431e-ba8c-db1ab5190e1b)
+
 
 ---
 

@@ -18,6 +18,45 @@ La base de données est organisée autour des entités principales suivantes :
 
 ![WhatsApp Image 2025-04-18 à 17 55 58_7f4de1b1](https://github.com/user-attachments/assets/056bc407-3a98-431e-ba8c-db1ab5190e1b)
 
+c = createdAt
+u = updatetedAt
+
+## 🔄 Relations entre les entités
+
+- **Projet et Niveaux de projet**  
+  - Relation **un-à-plusieurs** (1,N)  
+  - Un projet peut avoir plusieurs niveaux de projet  
+  - Chaque niveau de projet appartient à un seul projet
+
+- **Projet et Catégorie**  
+  - Relation **plusieurs-à-un** (N,1)  
+  - Plusieurs projets peuvent appartenir à une même catégorie  
+  - Chaque projet appartient à une seule catégorie
+
+- **Projet et Utilisateur**  
+  - Relation **plusieurs-à-un** (N,1)  
+  - Un utilisateur peut posséder plusieurs projets  
+  - Chaque projet appartient à un seul utilisateur
+
+- **Projet et Donation**  
+  - Relation **un-à-plusieurs** (1,N)  
+  - Un projet peut recevoir plusieurs donations  
+  - Chaque donation est associée à un seul projet
+
+- **Projet et Niveau de récompense**  
+  - Relation **un-à-plusieurs** (1,N)  
+  - Un projet peut avoir plusieurs niveaux de récompense  
+  - Chaque niveau de récompense appartient à un seul projet
+
+- **Niveau de récompense et Donation**  
+  - Relation **plusieurs-à-plusieurs** (N,M)  
+  - Une donation peut être associée à plusieurs niveaux de récompense  
+  - Un niveau de récompense peut être associé à plusieurs donations
+
+- **Utilisateur et Donation**  
+  - Relation **un-à-plusieurs** (1,N)  
+  - Un utilisateur peut effectuer plusieurs donations  
+  - Chaque donation est associée à un seul utilisateur
 
 ---
 

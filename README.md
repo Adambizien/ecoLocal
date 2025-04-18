@@ -25,24 +25,15 @@ La base de données est organisée autour des entités principales suivantes :
 
 Voici les différents parcours proposés sur la plateforme :
 
-### Utilisateur non connecté
-- Accès à la page d’accueil
-- Consultation des projets en ligne
-- Possibilité de s’inscrire ou se connecter
+### Contributions
+![WhatsApp Image 2025-04-18 à 17 57 39_a9739e47](https://github.com/user-attachments/assets/693a48f1-e402-4e32-b991-94f7f325ee74)
 
-### Donateur
-- Création de compte et connexion
-- Consultation des projets
-- Participation via un don
-- Suivi de ses contributions
 
 ### Porteur de projet
-- Création de compte et connexion
-- Soumission d’un projet via un formulaire
-- Suivi des statistiques de son projet (montants reçus, commentaires, etc.)
+![WhatsApp Image 2025-04-18 à 17 57 14_dba61706](https://github.com/user-attachments/assets/8ac442cf-b0a8-4af4-80e6-36bcddb46736)
+
 
 ### Administrateur
-- Gestion des utilisateurs
-- Modération des projets (validation, suppression, etc.)
-- Suivi global des activités sur la plateforme
+![WhatsApp Image 2025-04-18 à 17 57 02_82d82b20](https://github.com/user-attachments/assets/77b8212f-cb77-48c2-9351-30986834275f)
+
 
